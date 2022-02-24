@@ -1,0 +1,28 @@
+{
+  "name": "Solana Fee Tracker",
+  "description": "An app to track Solana fees",
+  "version": "1.1",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+
+   "icons": {
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+
+  "content_security_policy": {
+    "extension_pages" : "script-src 'self'; connect-src 'self' https://api.coingecko.com/api/v3/simple/price https://api.mainnet-beta.solana.com/ https://api.devnet.solana.com/ wss://api.mainnet-beta.solana.com/ wss://api.devnet.solana.com/ https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js; object-src 'self'"
+ },
+
+
+"permissions": ["alarms"],
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "logo.png"
+  }
+}
