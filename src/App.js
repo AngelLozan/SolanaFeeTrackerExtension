@@ -53,7 +53,7 @@ const minting = async () => {
     fromWallet.publicKey,
     web3.LAMPORTS_PER_SOL,
   );
-  //await connection2.confirmTransaction(fromAirdropSignature);
+  await connection2.confirmTransaction(fromAirdropSignature);
   const balance = await connection2.getBalance(fromWallet.publicKey);
   let mint = await splToken.Token.createMint(
     connection2,
