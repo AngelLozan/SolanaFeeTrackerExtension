@@ -21,8 +21,8 @@ function App() {
   const [slots, setSlots] = useState();
   const [lamports, setLamports] = useState();
   const [avg, setAvg] = useState();
-  const [tokenCost, setTokenCost] = useState();
-  const [nftCost, setNftCost] = useState();
+  const [tokenCost, setTokenCost] = useState(.0051);
+  const [nftCost, setNftCost] = useState(.011140);
   const [error, setError] = useState(null);
 
 const getSlot = async () => {
@@ -46,13 +46,14 @@ const getSlot = async () => {
 };
 
 const minting = async () => {
+  
   let connection2 = await new web3.Connection(web3.clusterApiUrl('devnet'), 'confirmed');
   var fromWallet = await web3.Keypair.generate();
   var fromAirdropSignature = await connection2.requestAirdrop(
     fromWallet.publicKey,
     web3.LAMPORTS_PER_SOL,
   );
-  await connection2.confirmTransaction(fromAirdropSignature);
+  //await connection2.confirmTransaction(fromAirdropSignature);
   const balance = await connection2.getBalance(fromWallet.publicKey);
   let mint = await splToken.Token.createMint(
     connection2,
@@ -158,7 +159,7 @@ const minting = async () => {
         ariaLabel= "loading" 
         /> </div>
         </div>}
-        {avg && !nftCost && <div> <p id="p" style={{ color: "white", padding: "10px", marginLeft: "5px", marginRight: "5px", textAlign: "center", borderRadius: "10px", fontSize: "15px", outline: "2px solid #161b19"}}>Performing calulations, this could take a moment...</p>
+        {avg && !nftCost && <div> <p id="p" style={{ color: "white", padding: "10px", marginLeft: "5px", marginRight: "5px", textAlign: "center", borderRadius: "10px", fontSize: "15px", outline: "2px solid #161b19"}}>Performing calulations, one moment...</p>
       <div className="bars">
       <Bars 
         heigth="100" 
@@ -167,7 +168,7 @@ const minting = async () => {
         ariaLabel= "loading" 
         /> </div>
         </div>}
-    {nftCost && lamports && avg && <div>
+    {lamports && avg && <div>
         <p style={{padding: "5px", textAlign: "center", textDecoration:"none", color:"white"}}><span>Slot #: {slots} </span></p>
         <p style={{padding: "5px", textAlign: "center", textDecoration:"none", color:"white"}}><span>Average Fee: {avg} SOL</span></p>
         <h5 id="parallelogramMid"><span id="icon"> Create token: {tokenCost} SOL</span> </h5>
